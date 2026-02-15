@@ -20,8 +20,6 @@ class Triangle {
         this.a = a;
         this.b = b;
         this.c = c;
-        this._perimeter = this.perimeterCalculation(a,b,c);
-        this._area = this.areaCalculation(a,b,c);
     }
 
     validateValues(a, b, c) {
@@ -30,8 +28,12 @@ class Triangle {
         }
     }
 
-    perimeterCalculation(a, b, c) {
-        return a + b + c;
+    get perimeter() {
+        return this.a + this.b + this.c;
+    }
+
+    get area() {
+        return this.areaCalculation(this.a, this.b, this.c);
     }
 
     areaCalculation(a, b, c) {
@@ -39,16 +41,19 @@ class Triangle {
         let area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
         return Number(area.toFixed(3));
     }
-
-    get perimeter(){
-        return this._perimeter;
-    }
-
-    get area(){
-        return this._area;
-    }
 }
 
-function getTriangle(a, b, c){
-    return new Triangle(a, b, c);
+function getTriangle(a, b, c) {
+    try {
+        return new Triangle(a, b, c);
+    } catch (error) {
+        return {
+            get perimeter() {
+                return 'Ошибка! Треугольник не существует';
+            },
+            get area() {
+                return 'Ошибка! Треугольник не существует';
+            }
+        };
+    }
 }
