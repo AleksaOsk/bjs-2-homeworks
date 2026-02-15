@@ -48,3 +48,7 @@ class Triangle {
         return this._area;
     }
 }
+
+function getTriangle(a, b, c){
+    return new Triangle(a, b, c);
+}
